@@ -35,14 +35,14 @@ def get_widget_html():
 async def prediction_widget():
     """
     Serve prediction widget as standalone HTML page.
-    WordPress embeds via iframe at: https://litimez.ai/api/widget/prediction
+    WordPress embeds via iframe at: https://example.com/api/widget/prediction
     """
     html = get_widget_html()
     return HTMLResponse(
         content=html,
         headers={
-            "X-Frame-Options": "ALLOW-FROM https://litimez.ai",
-            "Content-Security-Policy": "frame-ancestors 'self' https://litimez.ai; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline';",
+            "X-Frame-Options": "ALLOW-FROM https://example.com",
+            "Content-Security-Policy": "frame-ancestors 'self' https://example.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline';",
             "Cache-Control": "no-cache, no-store, must-revalidate, max-age=0",
             "Pragma": "no-cache",
             "Expires": "0",
@@ -77,7 +77,7 @@ async def prediction_widget_embed():
     """Return embed code snippet for iframe."""
     embed_code = '''
     <iframe 
-        src="https://litimez.ai/api/widget/prediction" 
+        src="https://example.com/api/widget/prediction" 
         width="100%" 
         height="700" 
         frameborder="0" 

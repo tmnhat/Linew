@@ -279,7 +279,7 @@ export default function SEOPage() {
             type="url"
             value={pingUrl}
             onChange={(e) => setPingUrl(e.target.value)}
-            placeholder="https://litimez.ai/article-slug"
+            placeholder="https://example.com/article-slug"
             className="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500"
           />
           <button
@@ -343,7 +343,7 @@ export default function SEOPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <button
             onClick={() => {
-              navigator.clipboard.writeText('https://litimez.ai/sitemap.xml');
+              navigator.clipboard.writeText('https://example.com/sitemap.xml');
               addToast({ type: 'success', title: 'Đã copy', message: 'Sitemap URL copied!' });
             }}
             className="p-4 bg-gray-50 hover:bg-gray-100 rounded-lg text-center transition-colors"
@@ -354,7 +354,7 @@ export default function SEOPage() {
           </button>
           <button
             onClick={() => {
-              navigator.clipboard.writeText('https://litimez.ai/sitemap-news.xml');
+              navigator.clipboard.writeText('https://example.com/sitemap-news.xml');
               addToast({ type: 'success', title: 'Đã copy', message: 'News Sitemap URL copied!' });
             }}
             className="p-4 bg-gray-50 hover:bg-gray-100 rounded-lg text-center transition-colors"
@@ -365,7 +365,7 @@ export default function SEOPage() {
           </button>
           <button
             onClick={() => {
-              navigator.clipboard.writeText('https://litimez.ai/robots.txt');
+              navigator.clipboard.writeText('https://example.com/robots.txt');
               addToast({ type: 'success', title: 'Đã copy', message: 'Robots.txt URL copied!' });
             }}
             className="p-4 bg-gray-50 hover:bg-gray-100 rounded-lg text-center transition-colors"

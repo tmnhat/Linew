@@ -1,6 +1,6 @@
 # Linew Legal Compliance Setup Guide
 
-Hướng dẫn hoàn thiện hệ thống pháp lý cho **litimez.ai** hoạt động tại Mỹ.
+Hướng dẫn hoàn thiện hệ thống pháp lý cho **example.com** hoạt động tại Mỹ.
 
 ---
 
@@ -25,13 +25,13 @@ Tạo các trang sau trong WordPress Admin. Mỗi trang cần được set as "P
 <p><strong>Last Updated: [AUTO_DATE]</strong></p>
 <p><strong>Effective Date: [AUTO_DATE]</strong></p>
 
-<p>Welcome to Litimez ("Linews," "we," "us," or "our"), a news aggregation and market analysis platform operated at litimez.ai. By accessing or using our website, you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, please do not use our website.</p>
+<p>Welcome to Litimez ("Linews," "we," "us," or "our"), a news aggregation and market analysis platform operated at example.com. By accessing or using our website, you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, please do not use our website.</p>
 
 <h2>1. Description of Service</h2>
 <p>Litimez provides automated news aggregation, AI-assisted content creation, and market analysis tools including the Linews Analysis market prediction feature. Our content is compiled from publicly available news sources and enhanced using artificial intelligence technologies. Litimez is a media and information platform — we are NOT a financial advisor, broker-dealer, or registered investment adviser.</p>
 
 <h2>2. Acceptance of Terms</h2>
-<p>By using this website, subscribing to our newsletter, or accessing any content on litimez.ai, you agree to these Terms, our Privacy Policy, our Cookie Policy, and our DMCA Policy, all of which are incorporated by reference into these Terms.</p>
+<p>By using this website, subscribing to our newsletter, or accessing any content on example.com, you agree to these Terms, our Privacy Policy, our Cookie Policy, and our DMCA Policy, all of which are incorporated by reference into these Terms.</p>
 
 <h2>3. Content and Intellectual Property</h2>
 <p><strong>3.1 Our Content:</strong> The content on Litimez is created with the assistance of artificial intelligence and is based on information from third-party sources. We make reasonable efforts to ensure accuracy but do not guarantee the completeness, reliability, or timeliness of any content published on our platform.</p>
@@ -77,7 +77,7 @@ Tạo các trang sau trong WordPress Admin. Mỗi trang cần được set as "P
 <p>If any provision of these Terms is found to be unenforceable, the remaining provisions will remain in full force and effect.</p>
 
 <h2>14. Contact</h2>
-<p>For questions about these Terms, contact us at: <a href="mailto:legal@litimez.ai">legal@litimez.ai</a></p>
+<p>For questions about these Terms, contact us at: <a href="mailto:legal@example.com">legal@example.com</a></p>
 ```
 
 ### 1.2 /privacy-policy
@@ -87,7 +87,7 @@ Tạo các trang sau trong WordPress Admin. Mỗi trang cần được set as "P
 <p><strong>Last Updated: [AUTO_DATE]</strong></p>
 <p><strong>Effective Date: [AUTO_DATE]</strong></p>
 
-<p>Litimez ("Linews," "we," "us," or "our") respects your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit litimez.ai, subscribe to our newsletter, or interact with our services.</p>
+<p>Litimez ("Linews," "we," "us," or "our") respects your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit example.com, subscribe to our newsletter, or interact with our services.</p>
 
 <h2>1. Information We Collect</h2>
 
@@ -135,7 +135,7 @@ Tạo các trang sau trong WordPress Admin. Mỗi trang cần được set as "P
 <li><strong>Right to Opt-Out of Sale:</strong> We do not sell personal information. No opt-out is necessary.</li>
 <li><strong>Right to Non-Discrimination:</strong> We will not discriminate against you for exercising your privacy rights.</li>
 </ul>
-<p>To exercise these rights, email us at <a href="mailto:privacy@litimez.ai">privacy@litimez.ai</a>. We will respond within 45 days.</p>
+<p>To exercise these rights, email us at <a href="mailto:privacy@example.com">privacy@example.com</a>. We will respond within 45 days.</p>
 
 <h2>5. Data Retention</h2>
 <ul>
@@ -158,8 +158,8 @@ Tạo các trang sau trong WordPress Admin. Mỗi trang cần được set as "P
 <p>We may update this Privacy Policy periodically. We will notify you of material changes by posting the new policy on this page with an updated date.</p>
 
 <h2>10. Contact</h2>
-<p>Privacy inquiries: <a href="mailto:privacy@litimez.ai">privacy@litimez.ai</a></p>
-<p>General inquiries: <a href="mailto:contact@litimez.ai">contact@litimez.ai</a></p>
+<p>Privacy inquiries: <a href="mailto:privacy@example.com">privacy@example.com</a></p>
+<p>General inquiries: <a href="mailto:contact@example.com">contact@example.com</a></p>
 <p>Mailing address: <strong>[YOUR_PHYSICAL_ADDRESS]</strong></p>
 ```
 
@@ -176,13 +176,13 @@ Tạo các trang sau trong WordPress Admin. Mỗi trang cần được set as "P
 <p>
 <strong>DMCA Agent</strong><br>
 Litimez / Linews<br>
-Email: <a href="mailto:dmca@litimez.ai">dmca@litimez.ai</a><br>
+Email: <a href="mailto:dmca@example.com">dmca@example.com</a><br>
 Mailing Address: <strong>[YOUR_PHYSICAL_ADDRESS]</strong><br>
 </p>
 <p>Our DMCA agent is also registered with the U.S. Copyright Office Designated Agent Directory.</p>
 
 <h2>2. Filing a DMCA Takedown Notice</h2>
-<p>If you believe that content on litimez.ai infringes your copyright, please send a written notice to our DMCA Agent containing:</p>
+<p>If you believe that content on example.com infringes your copyright, please send a written notice to our DMCA Agent containing:</p>
 <ol>
 <li>A physical or electronic signature of the copyright owner or a person authorized to act on their behalf.</li>
 <li>Identification of the copyrighted work claimed to have been infringed.</li>
@@ -224,7 +224,7 @@ Mailing Address: <strong>[YOUR_PHYSICAL_ADDRESS]</strong><br>
 <p><strong>Last Updated: [AUTO_DATE]</strong></p>
 
 <h2>Not Investment Advice</h2>
-<p>All content on Litimez (litimez.ai), including but not limited to the Linews Analysis market prediction feature, news articles, market commentary, charts, data, and all other financial information, is provided for <strong>informational and educational purposes only</strong>.</p>
+<p>All content on Litimez (example.com), including but not limited to the Linews Analysis market prediction feature, news articles, market commentary, charts, data, and all other financial information, is provided for <strong>informational and educational purposes only</strong>.</p>
 
 <p><strong>Nothing on this website constitutes:</strong></p>
 <ul>
@@ -321,7 +321,7 @@ Mailing Address: <strong>[YOUR_PHYSICAL_ADDRESS]</strong><br>
 <p>We encourage readers to verify important information through original sources and to use our content as a starting point for their own research.</p>
 
 <h2>Your Feedback</h2>
-<p>If you find errors in our content, please contact us at <a href="mailto:editorial@litimez.ai">editorial@litimez.ai</a>. We appreciate corrections and strive to improve our systems continuously.</p>
+<p>If you find errors in our content, please contact us at <a href="mailto:editorial@example.com">editorial@example.com</a>. We appreciate corrections and strive to improve our systems continuously.</p>
 ```
 
 ### 1.6 /cookie-policy
@@ -330,7 +330,7 @@ Mailing Address: <strong>[YOUR_PHYSICAL_ADDRESS]</strong><br>
 <h1>Cookie Policy</h1>
 <p><strong>Last Updated: [AUTO_DATE]</strong></p>
 
-<p>This Cookie Policy explains how Litimez (litimez.ai) uses cookies and similar tracking technologies.</p>
+<p>This Cookie Policy explains how Litimez (example.com) uses cookies and similar tracking technologies.</p>
 
 <h2>What Are Cookies?</h2>
 <p>Cookies are small text files stored on your device when you visit a website. They help websites remember your preferences and understand how you interact with the site.</p>
@@ -366,7 +366,7 @@ Mailing Address: <strong>[YOUR_PHYSICAL_ADDRESS]</strong><br>
 <p>Disabling cookies may affect website functionality.</p>
 
 <h2>Contact</h2>
-<p>Questions about our cookie practices: <a href="mailto:privacy@litimez.ai">privacy@litimez.ai</a></p>
+<p>Questions about our cookie practices: <a href="mailto:privacy@example.com">privacy@example.com</a></p>
 ```
 
 ---
@@ -381,11 +381,11 @@ Cấu hình email forwarding từ domain registrar (Namecheap, GoDaddy, etc.) ho
 
 | Email | Purpose | Forward to |
 |-------|---------|-----------|
-| legal@litimez.ai | Terms of Service, general legal | litimez.ai@gmail.com |
-| privacy@litimez.ai | Privacy Policy, CCPA requests | litimez.ai@gmail.com |
-| dmca@litimez.ai | DMCA takedown notices | litimez.ai@gmail.com |
-| editorial@litimez.ai | Content corrections, AI feedback | litimez.ai@gmail.com |
-| contact@litimez.ai | General inquiries | litimez.ai@gmail.com |
+| legal@example.com | Terms of Service, general legal | example.com@gmail.com |
+| privacy@example.com | Privacy Policy, CCPA requests | example.com@gmail.com |
+| dmca@example.com | DMCA takedown notices | example.com@gmail.com |
+| editorial@example.com | Content corrections, AI feedback | example.com@gmail.com |
+| contact@example.com | General inquiries | example.com@gmail.com |
 
 ### 2.3 Configuration Steps
 
@@ -425,9 +425,9 @@ Cấu hình email forwarding từ domain registrar (Namecheap, GoDaddy, etc.) ho
 3. **Designate New Agent**:
    - Click "Designate a New Agent"
    - Fill in information:
-     - **Service Provider Name**: Litimez / litimez.ai
+     - **Service Provider Name**: Litimez / example.com
      - **Designated Agent Name**: [Your Name or Company Name]
-     - **Email**: dmca@litimez.ai
+     - **Email**: dmca@example.com
      - **Phone**: [Your Phone Number]
      - **Street Address**: [YOUR_PHYSICAL_ADDRESS]
      - **City**: [City]
@@ -495,11 +495,11 @@ Bạn cần một địa chỉ vật lý tại Mỹ. Options:
 
 ### 4.7 Emails
 
-- [ ] legal@litimez.ai forward hoạt động
-- [ ] privacy@litimez.ai forward hoạt động
-- [ ] dmca@litimez.ai forward hoạt động
-- [ ] editorial@litimez.ai forward hoạt động
-- [ ] contact@litimez.ai forward hoạt động
+- [ ] legal@example.com forward hoạt động
+- [ ] privacy@example.com forward hoạt động
+- [ ] dmca@example.com forward hoạt động
+- [ ] editorial@example.com forward hoạt động
+- [ ] contact@example.com forward hoạt động
 
 ---
 
@@ -548,5 +548,5 @@ app/core/ai_presets.py          # Copyright requirements in prompts
 | Financial Disclaimer | Pending | Tạo page trong WordPress |
 | AI Disclosure | Pending | Tạo page trong WordPress |
 | Cookie Policy | Pending | Tạo page trong WordPress |
-| Email Setup | Partial | Sử dụng litimez.ai@gmail.com |
+| Email Setup | Partial | Sử dụng example.com@gmail.com |
 | Physical Address | Pending | Cần cung cấp địa chỉ Mỹ |

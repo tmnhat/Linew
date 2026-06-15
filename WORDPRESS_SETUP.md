@@ -27,7 +27,7 @@ Mở trình duyệt và truy cập:
    - Site Title: `Linews - Tin tức Công nghệ & Tài chính`
    - Username: `admin`
    - Password: `Use a strong password`
-   - Email: `admin@litimez.ai`
+   - Email: `admin@example.com`
    - Search Engine Visibility: **UNCHECK** "Discourage search engines"
 
 7. Click **Install WordPress**
@@ -37,8 +37,8 @@ Mở trình duyệt và truy cập:
 Sau khi login:
 1. Vào **Settings** → **General**
 2.确保:
-   - WordPress Address (URL): `https://litimez.ai`
-   - Site Address (URL): `https://litimez.ai`
+   - WordPress Address (URL): `https://example.com`
+   - Site Address (URL): `https://example.com`
 3. Click **Save Changes**
 
 ### Bước 4: Cài đặt Required Plugins

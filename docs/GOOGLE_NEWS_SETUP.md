@@ -13,7 +13,7 @@ This guide explains how to set up Linew for Google News inclusion and search eng
 1. Go to [Google Search Console](https://search.google.com/search-console)
 2. Sign in with your Google account
 3. Click "Add property"
-4. Choose "URL prefix" and enter `https://litimez.ai`
+4. Choose "URL prefix" and enter `https://example.com`
 
 ### 1.2 Verify Ownership
 
@@ -65,14 +65,14 @@ If you prefer DNS verification, add a TXT record to your domain's DNS settings.
 1. Click "Add publication"
 2. Select "Website"
 3. Enter publication name: "Linews"
-4. Website URL: `https://litimez.ai`
+4. Website URL: `https://example.com`
 5. Click "Continue"
 
 ### 2.3 Publication Details
 
 **Basic Information:**
 - Publication name: Linews
-- Publication URL: `https://litimez.ai`
+- Publication URL: `https://example.com`
 - Description: Tin tức Khoa học Công nghệ và Tài chính cập nhật 24/7
 
 **Content Language:**
@@ -95,7 +95,7 @@ Select relevant categories:
 ### 2.6 Add RSS Feed
 
 1. Go to "Content" section
-2. Add RSS feed: `https://litimez.ai/feed/`
+2. Add RSS feed: `https://example.com/feed/`
 3. Google will fetch articles from this feed
 
 ### 2.7 Add Logo
@@ -150,7 +150,7 @@ Bloomberg, Reuters, VnExpress, CafeF và nhiều nguồn khác.</p>
 **Contact Page (`/contact`):**
 ```html
 <h1>Liên hệ</h1>
-<p>Email: contact@litimez.ai</p>
+<p>Email: contact@example.com</p>
 <p>Telegram: @linews_vn</p>
 <p>Facebook: facebook.com/linews</p>
 ```

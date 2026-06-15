@@ -199,7 +199,7 @@ NEWSLETTER_TEMPLATE = """
             </p>
         </div>
 
-        <p style="margin-top: 16px;">&copy; {{ year }} Linews - litimez.ai</p>
+        <p style="margin-top: 16px;">&copy; {{ year }} Linews - example.com</p>
     </div>
 </body>
 </html>

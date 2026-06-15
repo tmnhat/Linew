@@ -16,7 +16,7 @@ async def robots():
     Generate robots.txt for search engines.
     """
     settings = get_settings()
-    site_url = settings.site_url.rstrip("/") if settings.site_url else "https://litimez.ai"
+    site_url = settings.site_url.rstrip("/") if settings.site_url else "https://example.com"
 
     content = f"""User-agent: *
 Allow: /

@@ -77,7 +77,7 @@ Description: For Linew Google Indexing API
 ### 4.1 Cấp quyền truy cập
 
 1. Truy cập: **https://search.google.com/search-console**
-2. Chọn property: `https://litimez.ai`
+2. Chọn property: `https://example.com`
 3. Click **Settings** (Cài đặt) ở menu bên trái
 4. Click **Users and permissions**
 5. Click **ADD USER**

@@ -1,7 +1,7 @@
 #!/bin/bash
 # Create WordPress App Password and save to .env
 
-WP_URL="https://litimez.ai"
+WP_URL="https://example.com"
 ADMIN_USER="admin"
 ADMIN_PASS="Linew2026!"
 
@@ -37,7 +37,7 @@ if [[ "$APP_PASS" == *"error"* ]] || [[ "$APP_PASS" == *"<"* ]]; then
     echo ""
     echo "⚠️  Cannot create app password via API."
     echo "   Please do this manually:"
-    echo "   1. Go to: https://litimez.ai/wp-admin/"
+    echo "   1. Go to: https://example.com/wp-admin/"
     echo "   2. Login as admin / Linew2026!"
     echo "   3. Go to: Users > Profile"
     echo "   4. Scroll to 'Application Passwords'"

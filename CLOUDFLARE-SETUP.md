@@ -1,6 +1,6 @@
 # Linew - Cloudflare Setup Guide
 # ======================================
-# Hướng dẫn cấu hình Cloudflare cho litimez.ai
+# Hướng dẫn cấu hình Cloudflare cho example.com
 # Last Updated: 2026-04-28
 
 ---
@@ -21,7 +21,7 @@ Có 2 cách sử dụng Cloudflare với Linew:
 1. Truy cập https://dash.cloudflare.com/
 2. Đăng ký tài khoản mới hoặc login
 3. Click "Add a site"
-4. Nhập domain: `litimez.ai`
+4. Nhập domain: `example.com`
 5. Chọn plan: **Free** (đủ cho website thông thường)
 
 ### 1.2 Cập nhật Nameservers tại Spaceship
@@ -35,7 +35,7 @@ ns2.cloudflare.com
 
 Tại Spaceship (domain registrar):
 1. Đăng nhập https://www.spaceship.com/
-2. Vào **Domain Management** → **litimez.ai**
+2. Vào **Domain Management** → **example.com**
 3. Tìm **Nameservers** settings
 4. Thay đổi thành Cloudflare nameservers:
    - Nameserver 1: `ns1.cloudflare.com`
@@ -43,7 +43,7 @@ Tại Spaceship (domain registrar):
 
 ### 1.3 Cập nhật DNS Records tại Cloudflare
 
-1. Truy cập Cloudflare Dashboard → litimez.ai → **DNS** → **Records**
+1. Truy cập Cloudflare Dashboard → example.com → **DNS** → **Records**
 2. Xóa các records cũ (nếu có)
 3. Thêm mới:
 
@@ -75,12 +75,12 @@ Tại Spaceship (domain registrar):
 
 1. Vào **SSL/TLS** → **Origin Server**
 2. Click **Create Certificate**
-3. Leave hostname as: `litimez.ai` và `*.litimez.ai`
+3. Leave hostname as: `example.com` và `*.example.com`
 4. Click **Create**
 5. Copy **Origin Certificate** và **Private key**
 6. Lưu vào server:
-   - Certificate: `/etc/ssl/certs/litimez.ai.pem`
-   - Private key: `/etc/ssl/private/litimez.ai.key`
+   - Certificate: `/etc/ssl/certs/example.com.pem`
+   - Private key: `/etc/ssl/private/example.com.key`
 
 7. Cập nhật nginx config để sử dụng SSL
 
@@ -148,9 +148,9 @@ credentials-file: C:\Users\YOUR_USERNAME\.cloudflared\YOUR_TUNNEL_ID.json
 # Proxy traffic đến các service trong Docker
 ingress:
   # Dashboard và API
-  - hostname: litimez.ai
+  - hostname: example.com
     service: http://localhost:80
-  - hostname: www.litimez.ai
+  - hostname: www.example.com
     service: http://localhost:80
   # Fallback
   - service: http_status:404
@@ -160,8 +160,8 @@ ingress:
 
 ```bash
 # Tạo DNS record tự động
-cloudflared tunnel route dns linew-tunnel litimez.ai
-cloudflared tunnel route dns linew-tunnel www.litimez.ai
+cloudflared tunnel route dns linew-tunnel example.com
+cloudflared tunnel route dns linew-tunnel www.example.com
 ```
 
 ### 2.7 Chạy Tunnel
@@ -203,7 +203,7 @@ Cập nhật `nginx/default.conf` (production):
 ```nginx
 server {
     listen 80;
-    server_name litimez.ai www.litimez.ai;
+    server_name example.com www.example.com;
 
     # Redirect HTTP to HTTPS
     return 301 https://$server_name$request_uri;
@@ -211,11 +211,11 @@ server {
 
 server {
     listen 443 ssl;
-    server_name litimez.ai www.litimez.ai;
+    server_name example.com www.example.com;
 
     # SSL from Cloudflare Origin Certificate
-    ssl_certificate /etc/ssl/certs/litimez.ai.pem;
-    ssl_certificate_key /etc/ssl/private/litimez.ai.key;
+    ssl_certificate /etc/ssl/certs/example.com.pem;
+    ssl_certificate_key /etc/ssl/private/example.com.key;
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256;
     ssl_prefer_server_ciphers off;
@@ -231,7 +231,7 @@ Tải Caddy: https://caddyserver.com/download
 Tạo `Caddyfile`:
 
 ```
-litimez.ai {
+example.com {
     reverse_proxy /dashboard/api/* localhost:8000
     reverse_proxy /dashboard/ws/* localhost:8000
     reverse_proxy /dashboard/* localhost:3000
@@ -274,14 +274,14 @@ New-NetFirewallRule -DisplayName "Linew HTTPS" -Direction Inbound -Action Allow 
 ### Kiểm tra DNS
 
 ```bash
-nslookup litimez.ai
-nslookup litimez.ai 1.1.1.1
+nslookup example.com
+nslookup example.com 1.1.1.1
 ```
 
 ### Kiểm tra SSL Certificate
 
 ```bash
-openssl s_client -connect litimez.ai:443 -servername litimez.ai
+openssl s_client -connect example.com:443 -servername example.com
 ```
 
 ### Kiểm tra Cloudflare Tunnel
@@ -341,7 +341,7 @@ cloudflared tunnel login
 cloudflared tunnel create linew-tunnel
 
 # Route DNS
-cloudflared tunnel route dns linew-tunnel litimez.ai
+cloudflared tunnel route dns linew-tunnel example.com
 
 # Run tunnel
 cloudflared tunnel run --token YOUR_TOKEN
@@ -357,13 +357,13 @@ cloudflared tunnel delete linew-tunnel
 
 Trong `.env` file:
 ```
-WP_URL=https://litimez.ai
-SITE_URL=https://litimez.ai
+WP_URL=https://example.com
+SITE_URL=https://example.com
 ```
 
 Trong WordPress Database hoặc wp-config.php:
 ```php
-define('WP_HOME', 'https://litimez.ai');
-define('WP_SITEURL', 'https://litimez.ai');
+define('WP_HOME', 'https://example.com');
+define('WP_SITEURL', 'https://example.com');
 $_SERVER['HTTPS'] = 'on';
 ```

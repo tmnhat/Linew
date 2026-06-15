@@ -1,7 +1,7 @@
 # Linew Setup Guide - Complete Reference
 # ======================================
 # Document này chứa toàn bộ cấu hình của Linew để setup trên máy mới
-# Domain: litimez.ai
+# Domain: example.com
 # Last Updated: 2026-04-28
 
 ---
@@ -68,7 +68,7 @@ AI_SUMMARIZER_MODEL=aws/minimax-m2.5
 ### 2.4 WordPress
 
 ```
-WP_URL=https://litimez.ai
+WP_URL=https://example.com
 WP_USERNAME=Litimez
 WP_APP_PASSWORD=hFI9 cndU zU0U 1yHo UrFq A6Vv
 ```
@@ -147,7 +147,7 @@ NEWSLETTER_FROM_EMAIL=linews@gmail.com
 
 ```
 GA_MEASUREMENT_ID=
-SITE_URL=https://litimez.ai
+SITE_URL=https://example.com
 SITE_NAME=Linews
 ```
 
@@ -266,7 +266,7 @@ Key routes:
 
 ## PART 5: DNS & DOMAIN CONFIGURATION
 
-### 5.1 Domain: litimez.ai
+### 5.1 Domain: example.com
 
 **Registrar:** Spaceship (spaceship.com)
 
@@ -279,7 +279,7 @@ Key routes:
 ### 5.2 Cloudflare Setup (Recommended)
 
 1. Go to https://dash.cloudflare.com
-2. Add domain: `litimez.ai`
+2. Add domain: `example.com`
 3. Update nameservers at Spaceship to Cloudflare's nameservers
 4. In Cloudflare Dashboard:
    - SSL/TLS Mode: **Full** or **Full (strict)**
@@ -298,7 +298,7 @@ cloudflared tunnel --url http://localhost:80
 Or create named tunnel:
 ```bash
 cloudflared tunnel create linew-tunnel
-cloudflared tunnel route dns linew-tunnel litimez.ai
+cloudflared tunnel route dns linew-tunnel example.com
 cloudflared tunnel run --token YOUR_TOKEN
 ```
 
@@ -321,13 +321,13 @@ cloudflared tunnel run --token YOUR_TOKEN
 
 - Site Title: `Linews - Tin tức Công nghệ & Tài chính`
 - Username: `admin`
-- Email: `admin@litimez.ai`
+- Email: `admin@example.com`
 
 ### 6.3 After Installation
 
 1. Settings → General:
-   - WordPress Address (URL): `https://litimez.ai`
-   - Site Address (URL): `https://litimez.ai`
+   - WordPress Address (URL): `https://example.com`
+   - Site Address (URL): `https://example.com`
 
 2. Install Plugins:
    - WP Super Cache (caching)
@@ -465,7 +465,7 @@ docker-compose restart mysql wordpress
 
 **4. Cloudflare SSL error:**
 - Check SSL mode is "Full" or "Full (strict)"
-- Ensure WordPress URL is set to https://litimez.ai
+- Ensure WordPress URL is set to https://example.com
 
 ### 10.2 Health Check Endpoints
 
@@ -521,7 +521,7 @@ AI_RESEARCHER_MODEL=aws/minimax-m2.5
 AI_SUMMARIZER_MODEL=aws/minimax-m2.5
 
 # WordPress
-WP_URL=https://litimez.ai
+WP_URL=https://example.com
 WP_USERNAME=YOUR_WP_USERNAME
 WP_APP_PASSWORD=YOUR_WP_APP_PASSWORD
 
@@ -568,7 +568,7 @@ NEWSLETTER_FROM_EMAIL=linews@gmail.com
 
 # Analytics & SEO
 GA_MEASUREMENT_ID=
-SITE_URL=https://litimez.ai
+SITE_URL=https://example.com
 SITE_NAME=Linews
 
 # CORS

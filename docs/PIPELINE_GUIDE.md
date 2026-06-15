@@ -50,7 +50,7 @@ curl http://localhost:8000/api/pipeline/info | python3 -m json.tool
 ### 3. Script khởi động nhanh
 
 ```bash
-cd /Users/tmnhat/Linew
+cd /path/to/linew
 
 # Khởi động toàn bộ hệ thống
 ./scripts/start-linew.sh docker

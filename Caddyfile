@@ -1,10 +1,10 @@
-# Caddyfile for Linew - litimez.ai
+# Caddyfile for Linew - example.com
 # =================================
 # Caddy is recommended for Windows as it auto-configures SSL
 # Download: https://caddyserver.com/download
 
 # Production with SSL (auto Let's Encrypt)
-litimez.ai {
+example.com {
     # API endpoints
     reverse_proxy /dashboard/api/* localhost:8000
     reverse_proxy /dashboard/ws/* localhost:8000

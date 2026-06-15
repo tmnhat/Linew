@@ -3,10 +3,10 @@
 
 set -e
 
-WP_URL="https://litimez.ai"
+WP_URL="https://example.com"
 BLOG_TITLE="LiTimez"
 ADMIN_USER="admin"
-ADMIN_EMAIL="admin@litimez.ai"
+ADMIN_EMAIL="admin@example.com"
 
 echo "Installing WordPress..."
 

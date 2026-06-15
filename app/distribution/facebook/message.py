@@ -30,7 +30,7 @@ def strip_all_links(text: str) -> str:
     - href attributes
     - http/https URLs
     - www. URLs
-    - litimez.ai, linews.ai, linews.com, linews.vn and related domains
+    - example.com, linews.ai, linews.com, linews.vn and related domains
     - Any remaining URL-like patterns (.com, .org, .net, .io, .co domains)
     """
     if not text:

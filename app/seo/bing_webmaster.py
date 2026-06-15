@@ -68,7 +68,7 @@ class BingWebmasterAPI:
         Submit a URL to Bing for indexing.
         
         Args:
-            site_url: The root URL of your site (e.g., https://litimez.ai/)
+            site_url: The root URL of your site (e.g., https://example.com/)
             page_url: The specific page URL to submit
             
         Returns:

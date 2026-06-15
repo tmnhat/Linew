@@ -1378,7 +1378,7 @@ export default function SettingsPage() {
                     smtp: { ...s.smtp, newsletter_from_email: e.target.value },
                   })
                 }
-                placeholder="newsletter@litimez.ai"
+                placeholder="newsletter@example.com"
                 className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500"
               />
             </div>
@@ -1425,7 +1425,7 @@ export default function SettingsPage() {
                     seo: { ...s.seo, site_url: e.target.value },
                   })
                 }
-                placeholder="https://litimez.ai"
+                placeholder="https://example.com"
                 className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500"
               />
             </div>
@@ -1453,15 +1453,15 @@ export default function SettingsPage() {
               <div className="space-y-2 text-sm">
                 <div className="flex items-center gap-2">
                   <span className="text-gray-500">Sitemap:</span>
-                  <code className="bg-gray-100 px-2 py-1 rounded">{settings.seo?.site_url ?? 'https://litimez.ai'}/sitemap.xml</code>
+                  <code className="bg-gray-100 px-2 py-1 rounded">{settings.seo?.site_url ?? 'https://example.com'}/sitemap.xml</code>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-gray-500">News:</span>
-                  <code className="bg-gray-100 px-2 py-1 rounded">{settings.seo?.site_url ?? 'https://litimez.ai'}/sitemap-news.xml</code>
+                  <code className="bg-gray-100 px-2 py-1 rounded">{settings.seo?.site_url ?? 'https://example.com'}/sitemap-news.xml</code>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-gray-500">Robots:</span>
-                  <code className="bg-gray-100 px-2 py-1 rounded">{settings.seo?.site_url ?? 'https://litimez.ai'}/robots.txt</code>
+                  <code className="bg-gray-100 px-2 py-1 rounded">{settings.seo?.site_url ?? 'https://example.com'}/robots.txt</code>
                 </div>
               </div>
             </div>

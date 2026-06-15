@@ -1,10 +1,10 @@
 #!/bin/bash
 # Auto-install WordPress via HTTP POST
 
-WP_URL="https://litimez.ai"
+WP_URL="https://example.com"
 BLOG_TITLE="LiTimez"
 ADMIN_USER="admin"
-ADMIN_EMAIL="admin@litimez.ai"
+ADMIN_EMAIL="admin@example.com"
 ADMIN_PASS="Linew2026!"
 
 echo "Installing WordPress..."

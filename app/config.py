@@ -37,7 +37,7 @@ class Settings(BaseSettings):
     ai_summarizer_model: str = "gpt-4o-mini"
 
     # WordPress
-    wp_url: str = "https://litimez.ai"
+    wp_url: str = "https://example.com"
     wp_username: str = "admin"
     wp_app_password: str = "xxxx-xxxx-xxxx-xxxx"
 
@@ -96,12 +96,12 @@ class Settings(BaseSettings):
 
     # Analytics & SEO
     ga_measurement_id: str = ""
-    site_url: str = "https://litimez.ai"
+    site_url: str = "https://example.com"
     site_name: str = "Linews"
 
     # Google Indexing API (for SEO ping)
     google_service_account_json: str = ""
-    google_site_url: str = "https://litimez.ai/"
+    google_site_url: str = "https://example.com/"
 
     # Bing Webmaster API (for SEO ping)
     bing_api_key: str = ""

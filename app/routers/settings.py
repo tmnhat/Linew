@@ -47,7 +47,7 @@ class SettingUpdate(BaseModel):
 # Default values for new settings
 DEFAULT_SEO = {
     "ga_measurement_id": "",
-    "site_url": "https://litimez.ai",
+    "site_url": "https://example.com",
     "site_name": "Linews",
 }
 

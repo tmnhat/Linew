@@ -96,6 +96,8 @@ config/*.json
 !.gitkeep
 
 # WordPress plugin/theme build artifacts
+wordpress/prediction-widget/widget.js
+wordpress/prediction-widget/widget.js.map
 wordpress/prediction-widget/dist/
 wordpress/prediction-widget/node_modules/
 

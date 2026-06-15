@@ -4,7 +4,7 @@ Test AI Gateway connection and configuration.
 """
 import asyncio
 import sys
-sys.path.insert(0, '/Users/tmnhat/Linew')
+sys.path.insert(0, '/path/to/linew')
 
 from app.config import get_settings
 from app.core.ai_gateway import AIGateway

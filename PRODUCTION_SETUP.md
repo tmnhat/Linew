@@ -1,10 +1,10 @@
-# Linew Production Deployment - litimez.ai
+# Linew Production Deployment - example.com
 # =========================================
 
 ## Step 1: DNS Configuration at Spaceship
 
 1. Login to https://www.spaceship.com/
-2. Navigate to your domain: **litimez.ai**
+2. Navigate to your domain: **example.com**
 3. Go to **DNS Settings** or **DNS Management**
 4. Add these DNS records:
 
@@ -29,7 +29,7 @@ DNS changes can take **5 minutes to 48 hours** to propagate globally.
 
 **Verify DNS is working:**
 ```bash
-nslookup litimez.ai
+nslookup example.com
 # Should return your server IP
 ```
 
@@ -61,7 +61,7 @@ Port 443 -> Your Windows PC IP
 ### Option A: Cloudflare (Easiest - Recommended)
 
 1. Create free account at https://dash.cloudflare.com
-2. Add your domain `litimez.ai`
+2. Add your domain `example.com`
 3. Update nameservers at Spaceship to Cloudflare's nameservers
 4. In Cloudflare dashboard:
    - SSL/TLS: Set to **Full** or **Flexible**
@@ -90,7 +90,7 @@ Caddy automatically obtains SSL from Let's Encrypt.
 1. Install Certbot: https://certbot.eff.org/instructions
 2. Generate certificate:
 ```bash
-certbot certonly --nginx -d litimez.ai -d www.litimez.ai
+certbot certonly --nginx -d example.com -d www.example.com
 ```
 
 3. Update nginx config with SSL paths
@@ -103,18 +103,18 @@ After setup, access Linew at:
 
 | Service | URL |
 |---------|-----|
-| **Main Site** | https://litimez.ai |
-| **Dashboard** | https://litimez.ai/dashboard |
-| **WordPress Admin** | https://litimez.ai/wp.admin |
-| **API Docs** | https://litimez.ai/docs |
+| **Main Site** | https://example.com |
+| **Dashboard** | https://example.com/dashboard |
+| **WordPress Admin** | https://example.com/wp.admin |
+| **API Docs** | https://example.com/docs |
 
 ---
 
 ## Step 6: Verify Everything Works
 
-1. Visit https://litimez.ai - should show WordPress
-2. Visit https://litimez.ai/dashboard - should show Linew Dashboard
-3. Visit https://litimez.ai/wp.admin - should show WordPress Admin login
+1. Visit https://example.com - should show WordPress
+2. Visit https://example.com/dashboard - should show Linew Dashboard
+3. Visit https://example.com/wp.admin - should show WordPress Admin login
 
 ---
 
@@ -126,7 +126,7 @@ After setup, access Linew at:
 ipconfig /flushdns
 
 # Check propagation
-nslookup litimez.ai 8.8.8.8
+nslookup example.com 8.8.8.8
 ```
 
 ### Can't access from outside?

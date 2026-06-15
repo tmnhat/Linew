@@ -129,7 +129,7 @@ Key variables:
 | `AI_PROVIDER`        | `openai` / `anthropic` / `vertex`                      |
 | `OPENAI_API_KEY`     | OpenAI key (if `AI_PROVIDER=openai`)                   |
 | `VERTEX_API_KEY`     | Vertex API key                                         |
-| `WP_URL`             | WordPress site URL (e.g. `https://litimez.ai`)         |
+| `WP_URL`             | WordPress site URL (e.g. `https://example.com`)         |
 | `WP_USERNAME`        | WordPress username                                     |
 | `WP_APP_PASSWORD`    | WordPress application password                         |
 | `TELEGRAM_BOT_TOKEN` | Telegram bot token                                     |
