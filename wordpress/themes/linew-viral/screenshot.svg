@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a1a"/>
+      <stop offset="100%" style="stop-color:#2a2a2a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#c41e3a"/>
+      <stop offset="100%" style="stop-color:#e63950"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="800" fill="#f7f7f7"/>
+  
+  <!-- Browser Chrome -->
+  <rect x="40" y="40" width="1120" height="720" rx="8" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+  <rect x="40" y="40" width="1120" height="32" rx="8" fill="#f5f5f5" stroke="#e0e0e0" stroke-width="1"/>
+  <circle cx="65" cy="56" r="6" fill="#ff5f57"/>
+  <circle cx="85" cy="56" r="6" fill="#febc2e"/>
+  <circle cx="105" cy="56" r="6" fill="#28c840"/>
+  <rect x="130" y="48" width="200" height="16" rx="8" fill="#eee"/>
+  
+  <!-- Top Bar -->
+  <rect x="40" y="72" width="1120" height="28" fill="#121212"/>
+  
+  <!-- Header -->
+  <rect x="40" y="100" width="1120" height="80" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+  
+  <!-- Logo -->
+  <text x="60" y="150" font-family="Arial Black, sans-serif" font-size="36" font-weight="900" fill="#121212">Linew<tspan fill="#c41e3a">.</tspan></text>
+  
+  <!-- Nav Items -->
+  <text x="350" y="150" font-family="Arial, sans-serif" font-size="12" font-weight="600" fill="#333">WORLD</text>
+  <text x="430" y="150" font-family="Arial, sans-serif" font-size="12" font-weight="600" fill="#333">TECH</text>
+  <text x="490" y="150" font-family="Arial, sans-serif" font-size="12" font-weight="600" fill="#333">BUSINESS</text>
+  <text x="570" y="150" font-family="Arial, sans-serif" font-size="12" font-weight="600" fill="#333">SCIENCE</text>
+  <text x="640" y="150" font-family="Arial, sans-serif" font-size="12" font-weight="600" fill="#333">OPINION</text>
+  
+  <!-- Subscribe Button -->
+  <rect x="1020" y="125" width="100" height="30" rx="4" fill="#c41e3a"/>
+  <text x="1070" y="145" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">SUBSCRIBE</text>
+  
+  <!-- Hero Section -->
+  <!-- Main Featured -->
+  <rect x="60" y="200" width="600" height="340" rx="6" fill="#2a2a2a"/>
+  <rect x="60" y="400" width="600" height="140" fill="url(#bg)" opacity="0.9"/>
+  <rect x="75" y="420" width="50" height="18" rx="3" fill="#c41e3a"/>
+  <text x="100" y="433" font-family="Arial, sans-serif" font-size="9" font-weight="700" fill="white" text-anchor="middle">WORLD</text>
+  <text x="75" y="460" font-family="Georgia, serif" font-size="22" font-weight="700" fill="white">Breaking: Major Global</text>
+  <text x="75" y="485" font-family="Georgia, serif" font-size="22" font-weight="700" fill="white">Event Unfolds</text>
+  <text x="75" y="510" font-family="Arial, sans-serif" font-size="11" fill="#aaa">By Staff Reporter | 2 hours ago</text>
+  
+  <!-- Sidebar Articles -->
+  <rect x="680" y="200" width="220" height="105" rx="4" fill="white" stroke="#e0e0e0"/>
+  <rect x="695" y="215" width="190" height="65" rx="3" fill="#ddd"/>
+  <text x="695" y="300" font-family="Georgia, serif" font-size="13" font-weight="700" fill="#121212">Tech Giants Report</text>
+  <text x="695" y="315" font-family="Georgia, serif" font-size="13" font-weight="700" fill="#121212">Q4 Earnings</text>
+  <text x="695" y="332" font-family="Arial, sans-serif" font-size="10" fill="#888">Jan 15, 2026</text>
+  
+  <rect x="680" y="315" width="220" height="105" rx="4" fill="white" stroke="#e0e0e0"/>
+  <rect x="695" y="330" width="190" height="65" rx="3" fill="#ddd"/>
+  <text x="695" y="415" font-family="Georgia, serif" font-size="13" font-weight="700" fill="#121212">Markets Rally on</text>
+  <text x="695" y="430" font-family="Georgia, serif" font-size="13" font-weight="700" fill="#121212">Positive Data</text>
+  <text x="695" y="447" font-family="Arial, sans-serif" font-size="10" fill="#888">Jan 15, 2026</text>
+  
+  <rect x="680" y="430" width="220" height="105" rx="4" fill="white" stroke="#e0e0e0"/>
+  <rect x="695" y="445" width="190" height="65" rx="3" fill="#ddd"/>
+  <text x="695" y="530" font-family="Georgia, serif" font-size="13" font-weight="700" fill="#121212">Climate Summit</text>
+  <text x="695" y="545" font-family="Georgia, serif" font-size="13" font-weight="700" fill="#121212">Reaches Agreement</text>
+  <text x="695" y="562" font-family="Arial, sans-serif" font-size="10" fill="#888">Jan 14, 2026</text>
+  
+  <!-- Section Title -->
+  <text x="60" y="570" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#121212">LATEST NEWS</text>
+  <rect x="60" y="575" width="50" height="2" fill="#c41e3a"/>
+  
+  <!-- News Grid -->
+  <g transform="translate(60, 590)">
+    <rect x="0" y="0" width="250" height="160" rx="4" fill="white" stroke="#e0e0e0"/>
+    <rect x="10" y="10" width="230" height="100" rx="3" fill="#ddd"/>
+    <text x="10" y="125" font-family="Georgia, serif" font-size="12" font-weight="700" fill="#121212">Article Title</text>
+    <text x="10" y="140" font-family="Arial, sans-serif" font-size="9" fill="#888">Author | Date</text>
+  </g>
+  
+  <g transform="translate(325, 590)">
+    <rect x="0" y="0" width="250" height="160" rx="4" fill="white" stroke="#e0e0e0"/>
+    <rect x="10" y="10" width="230" height="100" rx="3" fill="#ddd"/>
+    <text x="10" y="125" font-family="Georgia, serif" font-size="12" font-weight="700" fill="#121212">Article Title</text>
+    <text x="10" y="140" font-family="Arial, sans-serif" font-size="9" fill="#888">Author | Date</text>
+  </g>
+  
+  <g transform="translate(590, 590)">
+    <rect x="0" y="0" width="250" height="160" rx="4" fill="white" stroke="#e0e0e0"/>
+    <rect x="10" y="10" width="230" height="100" rx="3" fill="#ddd"/>
+    <text x="10" y="125" font-family="Georgia, serif" font-size="12" font-weight="700" fill="#121212">Article Title</text>
+    <text x="10" y="140" font-family="Arial, sans-serif" font-size="9" fill="#888">Author | Date</text>
+  </g>
+  
+  <g transform="translate(855, 590)">
+    <rect x="0" y="0" width="250" height="160" rx="4" fill="white" stroke="#e0e0e0"/>
+    <rect x="10" y="10" width="230" height="100" rx="3" fill="#ddd"/>
+    <text x="10" y="125" font-family="Georgia, serif" font-size="12" font-weight="700" fill="#121212">Article Title</text>
+    <text x="10" y="140" font-family="Arial, sans-serif" font-size="9" fill="#888">Author | Date</text>
+  </g>
+  
+  <!-- Theme Label -->
+  <text x="600" y="780" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#333" text-anchor="middle">LINEW VIRAL THEME - Premium News Template</text>
+</svg>

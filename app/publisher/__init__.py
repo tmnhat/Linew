@@ -1,0 +1,3 @@
+"""
+Publisher module - WordPress integration.
+"""

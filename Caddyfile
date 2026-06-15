@@ -1,0 +1,40 @@
+# Caddyfile for Linew - litimez.ai
+# =================================
+# Caddy is recommended for Windows as it auto-configures SSL
+# Download: https://caddyserver.com/download
+
+# Production with SSL (auto Let's Encrypt)
+litimez.ai {
+    # API endpoints
+    reverse_proxy /dashboard/api/* localhost:8000
+    reverse_proxy /dashboard/ws/* localhost:8000
+    reverse_proxy /api/prediction/* localhost:8000
+    reverse_proxy /api/widget/* localhost:8000
+    reverse_proxy /api/feed* localhost:8000
+    reverse_proxy /sitemap*.xml localhost:8000
+    reverse_proxy /robots.txt localhost:8000
+
+    # Dashboard (static files)
+    reverse_proxy /dashboard/* localhost:80
+
+    # WordPress
+    reverse_proxy /wp-admin/* localhost:8888
+    reverse_proxy /wp-login.php localhost:8888
+    reverse_proxy /* localhost:8888
+
+    # Logging
+    log {
+        output file C:/Users/tmnha/Linew/logs/caddy.log
+    }
+}
+
+# Development (no SSL)
+localhost {
+    reverse_proxy /dashboard/api/* localhost:8000
+    reverse_proxy /dashboard/ws/* localhost:8000
+    reverse_proxy /api/* localhost:8000
+    reverse_proxy /dashboard/* localhost:3000
+    reverse_proxy /wp-admin/* localhost:8888
+    reverse_proxy /wp-login.php localhost:8888
+    reverse_proxy /* localhost:8888
+}

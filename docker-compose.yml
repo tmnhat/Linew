@@ -1,0 +1,177 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: linew
+      POSTGRES_USER: linew
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U linew -d linew"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    ports:
+      - "8000:8000"
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://linew:${DB_PASSWORD}@postgres:5432/linew
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./app:/app/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    restart: unless-stopped
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://linew:${DB_PASSWORD}@postgres:5432/linew
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./app:/app/app
+      - linew-data:/data
+    # === WORKER CONCURRENCY CONFIG ===
+    # Tier Standard: 6 workers (for development)
+    #
+    # IMPORTANT: Worker Tier is configured via Dashboard.
+    # After changing Tier in Dashboard, run:
+    #   docker-compose restart worker
+    # to apply the new configuration.
+    command: celery -A app.worker.celery_app worker -l info -c 6
+    restart: unless-stopped
+
+  beat:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://linew:${DB_PASSWORD}@postgres:5432/linew
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      redis:
+        condition: service_healthy
+    volumes:
+      - linew-data:/data
+    command: celery -A app.worker.celery_app beat -l info --scheduler celery.beat:Scheduler
+    restart: unless-stopped
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.dashboard
+    networks:
+      - default
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx/.htpasswd:/etc/nginx/.htpasswd:ro
+      - ./dashboard/dist:/usr/share/nginx/html/dashboard:ro
+    depends_on:
+      - api
+      - wordpress
+    restart: unless-stopped
+
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: linew
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  wordpress:
+    image: wordpress:6-php8.2-apache
+    ports:
+      - "8888:80"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: linew
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+      WORDPRESS_TABLE_PREFIX: wp_
+    volumes:
+      - wpdata:/var/www/html
+      - ./wordpress/mu-plugins:/var/www/html/wp-content/mu-plugins
+      - ./wordpress/prediction-widget:/var/www/html/wp-content/prediction-widget
+      - ./wordpress/themes:/var/www/html/wp-content/themes
+    restart: unless-stopped
+
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    environment:
+      - LOG_LEVEL=info
+      - MAX_TIMEOUT=60000
+    ports:
+      - "8191:8191"
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  wpdata:
+  mysql_data:
+  redis_data:
+  linew-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${LINEW_DATA_PATH:-C:/Users/tmnha/Linew/data}
+
+# NOTE: The linew-data volume requires the bind mount directory to exist.
+# If /Users/tmnhat/Backup-Linew doesn't exist, run:
+#   mkdir -p /Users/tmnhat/Backup-Linew
+#
+# Or set LINEW_DATA_PATH environment variable to a different location.

@@ -1,0 +1,124 @@
+# Environment files
+.env
+.env.local
+.env.*.local
+.env.production
+.env.newcomputer
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Data
+*.db
+*.sqlite
+*.sqlite3
+data/
+backup/
+*.bak
+*.bak.*
+*.backup
+debug-*.js
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# Docker
+.dockerignore
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Distribution data
+linew-data/
+
+# Backup directory
+/Users/tmnhat/Backup-Linew
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dashboard build
+dashboard/dist/
+
+# Migration backups
+migrations/backup/
+
+# Google Service Account credentials
+config/google-service-account.json
+config/*.json
+!.gitkeep
+
+# WordPress plugin/theme build artifacts
+wordpress/prediction-widget/dist/
+wordpress/prediction-widget/node_modules/
+
+# Python type checking
+.mypy_cache/
+.ruff_cache/
+.pyright_cache/
+
+# Backup files
+*.backup.*
+index_backup.php
+header_backup.php
+footer_backup.php
+single_backup.php
+archive_backup.php
+feed-api-backup.php
+style_backup.css
+infinite-scroll.js
+
+# Postgres/Redis data (when running natively)
+pgdata/
+redisdata/
+
+# Sitemap and SEO generated files
+public/sitemap*.xml
+

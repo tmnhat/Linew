@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linews Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            padding: 16px;
+            min-height: 100vh;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        .widget-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 14px;
+        }
+        .widget-title span { margin-right: 6px; }
+
+        /* Search */
+        .search-container { position: relative; margin-bottom: 14px; }
+        .search-input {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+            background: rgba(255,255,255,0.05);
+            color: #e2e8f0;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .search-input:focus { border-color: #10b981; }
+        .search-input::placeholder { color: #64748b; }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0; right: 0;
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            margin-top: 4px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 100;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+        }
+        .search-result-item {
+            padding: 10px 14px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: background 0.15s;
+        }
+        .search-result-item:hover { background: rgba(255,255,255,0.08); }
+        .search-result-item:last-child { border-bottom: none; }
+        .search-result-symbol { font-weight: 700; color: #f1f5f9; font-size: 14px; }
+        .search-result-name { color: #94a3b8; font-size: 12px; margin-left: 8px; }
+        .search-result-market {
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+            color: #64748b;
+            text-transform: uppercase;
+        }
+
+        /* Price box */
+        .price-box {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            margin-bottom: 14px;
+        }
+        .current-price {
+            font-size: 30px;
+            font-weight: 700;
+            color: #f1f5f9;
+        }
+        .price-change {
+            display: inline-block;
+            margin-top: 6px;
+            padding: 3px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .price-change.up { background: rgba(16,185,129,0.2); color: #10b981; }
+        .price-change.down { background: rgba(239,68,68,0.2); color: #ef4444; }
+        .symbol-badge {
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+            color: #94a3b8;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        /* Horizon tabs */
+        .horizon-tabs {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 14px;
+        }
+        .horizon-tab {
+            flex: 1;
+            padding: 6px;
+            border-radius: 6px;
+            border: 1px solid #334155;
+            background: transparent;
+            color: #64748b;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        .horizon-tab.active {
+            border-color: #10b981;
+            background: rgba(16,185,129,0.15);
+            color: #10b981;
+        }
+
+        /* Chart */
+        .chart-container {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 14px;
+            position: relative;
+            height: 180px;
+        }
+        .chart-container canvas { width: 100% !important; height: 100% !important; }
+
+        /* Prediction grid */
+        .prediction-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+        .prediction-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+        .prediction-card .label {
+            font-size: 11px;
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+        .prediction-card .value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #f1f5f9;
+        }
+        .prediction-card .range {
+            font-size: 13px;
+            font-weight: 600;
+            color: #94a3b8;
+        }
+
+        /* Analysis box */
+        .analysis-box {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 14px;
+        }
+        .sentiment-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        .sentiment-label { font-size: 14px; font-weight: 600; }
+        .analysis-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        /* Footer */
+        .widget-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 12px;
+            color: #64748b;
+        }
+        .disclaimer {
+            font-size: 11px;
+            color: #475569;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        /* Loading spinner */
+        .loading {
+            text-align: center;
+            padding: 60px 0;
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: #10b981;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 16px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading p { color: #64748b; font-size: 14px; }
+
+        /* Error state */
+        .error-state {
+            background: rgba(239,68,68,0.1);
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .error-state .error-icon { font-size: 48px; margin-bottom: 12px; }
+        .error-state p { color: #f87171; margin-bottom: 16px; font-size: 14px; }
+        .retry-btn {
+            padding: 10px 24px;
+            background: #334155;
+            color: #e2e8f0;
+            border: 1px solid #475569;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .retry-btn:hover { background: #475569; }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+    <h2 class="widget-title"><span>&#128200;</span> Linews Analysis</h2>
+
+    <!-- Financial Disclaimer - Top of Widget -->
+    <p style="
+        font-size: 11px;
+        color: #64748b;
+        margin-bottom: 14px;
+        line-height: 1.5;
+        padding: 10px 12px;
+        background: rgba(255,255,255,0.03);
+        border-radius: 6px;
+        border-left: 2px solid #f59e0b;
+    ">
+        For informational purposes only. Not investment advice.
+        <a href="https://litimez.ai/financial-disclaimer" target="_blank" style="color: #60a5fa; text-decoration: underline;">Full disclaimer</a>
+    </p>
+
+    <!-- Search bar -->
+    <div class="search-container" id="searchContainer">
+        <input 
+            type="text" 
+            class="search-input" 
+            id="searchInput" 
+            placeholder="Nhập mã: FPT, BTC, AAPL..."
+            autocomplete="off"
+        >
+        <div class="search-results hidden" id="searchResults"></div>
+    </div>
+
+    <!-- Loading -->
+    <div class="loading" id="loadingState">
+        <div class="spinner"></div>
+        <p>Đang tải dữ liệu...</p>
+    </div>
+
+    <!-- Error -->
+    <div class="error-state hidden" id="errorState">
+        <div class="error-icon">⚠️</div>
+        <p id="errorMessage">Không thể tải dữ liệu</p>
+        <button class="retry-btn" id="retryBtn">Thử lại</button>
+    </div>
+
+    <!-- Content -->
+    <div class="hidden" id="dataContent">
+        <div class="price-box">
+            <div class="current-price" id="currentPrice">--</div>
+            <span class="price-change" id="priceChange">--%</span>
+        </div>
+
+        <div class="horizon-tabs" id="horizonTabs">
+            <button class="horizon-tab" data-h="1d">1 ngày</button>
+            <button class="horizon-tab active" data-h="7d">7 ngày</button>
+            <button class="horizon-tab" data-h="30d">30 ngày</button>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="predictionChart"></canvas>
+        </div>
+
+        <div class="prediction-grid">
+            <div class="prediction-card">
+                <div class="label" id="predLabel">Dự đoán 7 ngày</div>
+                <div class="value" id="predPrice">--</div>
+            </div>
+            <div class="prediction-card">
+                <div class="label">Khoảng tin cậy</div>
+                <div class="range" id="predRange">-- — --</div>
+            </div>
+        </div>
+
+        <div class="analysis-box" id="analysisBox">
+            <div class="sentiment-row">
+                <span id="sentimentEmoji">🟢</span>
+                <span class="sentiment-label" id="sentimentLabel">Xu hướng: --</span>
+            </div>
+            <p class="analysis-text" id="analysisText">--</p>
+        </div>
+
+        <div class="widget-footer">
+            <span id="accuracyText"></span>
+            <span id="updatedText">Cập nhật: --</span>
+        </div>
+
+        <!-- Enhanced Financial Disclaimer -->
+        <div style="
+            margin-top: 16px;
+            padding: 14px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            font-size: 11px;
+            line-height: 1.6;
+            color: #475569;
+            text-align: left;
+            border: 1px solid rgba(255,255,255,0.05);
+        ">
+            <p style="margin: 0 0 8px 0;">
+                <strong>Important Disclaimer:</strong> Linews Analysis provides market predictions for informational
+                and educational purposes only. This is NOT investment advice. Past performance does not guarantee
+                future results. All investments involve risk, including the potential loss of principal.
+            </p>
+            <p style="margin: 0;">
+                Consult a qualified financial advisor before making any investment decisions.
+                <a href="https://litimez.ai/financial-disclaimer" target="_blank" style="color: #60a5fa; text-decoration: underline;">Full Financial Disclaimer</a> |
+                <a href="https://litimez.ai/ai-disclosure" target="_blank" style="color: #60a5fa; text-decoration: underline;">AI Disclosure</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        'use strict';
+        
+        var API = '/api/prediction';
+        var FETCH_TIMEOUT = 10000;
+        
+        // Default: Bitcoin
+        var currentSymbol = 'BTC-USD';
+        var currentHorizon = '7d';
+        var currentData = null;
+        var chart = null;
+
+        function $id(s) { return document.getElementById(s); }
+
+        function init() {
+            setupSearch();
+            setupHorizonTabs();
+            $id('retryBtn').addEventListener('click', function() {
+                loadData(currentSymbol);
+            });
+            loadData(currentSymbol);
+        }
+
+        // ===== SEARCH =====
+        function setupSearch() {
+            var searchInput = $id('searchInput');
+            var searchResults = $id('searchResults');
+            var searchTimeout = null;
+
+            searchInput.addEventListener('input', function() {
+                var query = this.value.trim();
+                if (searchTimeout) clearTimeout(searchTimeout);
+                
+                if (query.length < 1) {
+                    searchResults.classList.add('hidden');
+                    return;
+                }
+                
+                searchTimeout = setTimeout(function() {
+                    doSearch(query);
+                }, 300);
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.search-container')) {
+                    searchResults.classList.add('hidden');
+                }
+            });
+        }
+
+        function doSearch(query) {
+            var searchResults = $id('searchResults');
+            
+            fetch(API + '/search?q=' + encodeURIComponent(query))
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    var results = data.results || [];
+                    
+                    if (results.length === 0) {
+                        searchResults.innerHTML = '<div style="padding:14px;color:#64748b;font-size:13px;">Không tìm thấy mã nào</div>';
+                    } else {
+                        var html = '';
+                        for (var i = 0; i < Math.min(results.length, 6); i++) {
+                            var r = results[i];
+                            var marketLabel = r.market === 'vn' ? 'VN' : r.market === 'crypto' ? 'CRYPTO' : 'US';
+                            html += '<div class="search-result-item" data-symbol="' + r.symbol + '" data-market="' + r.market + '">'
+                                + '<div><span class="search-result-symbol">' + r.symbol + '</span>'
+                                + '<span class="search-result-name">' + r.name + '</span></div>'
+                                + '<span class="search-result-market">' + marketLabel + '</span>'
+                                + '</div>';
+                        }
+                        searchResults.innerHTML = html;
+                        
+                        var items = searchResults.querySelectorAll('.search-result-item');
+                        for (var j = 0; j < items.length; j++) {
+                            items[j].addEventListener('click', function() {
+                                var sym = this.getAttribute('data-symbol');
+                                var mkt = this.getAttribute('data-market');
+                                selectSymbol(sym, mkt);
+                                $id('searchInput').value = '';
+                                searchResults.classList.add('hidden');
+                            });
+                        }
+                    }
+                    searchResults.classList.remove('hidden');
+                })
+                .catch(function(e) {
+                    console.error('Search failed:', e);
+                    searchResults.classList.add('hidden');
+                });
+        }
+
+        function selectSymbol(symbol, market) {
+            currentSymbol = symbol;
+            currentHorizon = '7d';
+            
+            // Update horizon tabs
+            document.querySelectorAll('.horizon-tab').forEach(function(t) { 
+                t.classList.toggle('active', t.getAttribute('data-h') === '7d'); 
+            });
+            
+            loadData(symbol);
+        }
+
+        // ===== HORIZON TABS =====
+        function setupHorizonTabs() {
+            var tabs = document.querySelectorAll('.horizon-tab');
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].addEventListener('click', function() {
+                    currentHorizon = this.getAttribute('data-h');
+                    document.querySelectorAll('.horizon-tab').forEach(function(t) { t.classList.remove('active'); });
+                    this.classList.add('active');
+                    if (currentData) {
+                        renderPredictionDetail(currentData);
+                    }
+                });
+            }
+        }
+
+        // ===== DATA LOADING =====
+        function loadData(symbol) {
+            showLoading();
+
+            var controller = null;
+            if (window.AbortController) {
+                controller = new AbortController();
+                setTimeout(function() { controller.abort(); }, FETCH_TIMEOUT);
+            }
+
+            fetch(API + '/' + encodeURIComponent(symbol), controller ? { signal: controller.signal } : {})
+                .then(function(r) {
+                    if (!r.ok) throw new Error('HTTP ' + r.status);
+                    return r.json();
+                })
+                .then(function(d) {
+                    if (d.error) throw new Error(d.error);
+                    currentData = d;
+                    renderAll(d);
+                    showData();
+                })
+                .catch(function(e) {
+                    if (e.name === 'AbortError') {
+                        showError('Hết thời gian chờ. Vui lòng thử lại.');
+                    } else {
+                        showError(e.message || 'Không thể tải dữ liệu');
+                    }
+                });
+        }
+
+        function showLoading() {
+            $id('loadingState').classList.remove('hidden');
+            $id('errorState').classList.add('hidden');
+            $id('dataContent').classList.add('hidden');
+        }
+
+        function showError(msg) {
+            $id('loadingState').classList.add('hidden');
+            $id('errorState').classList.remove('hidden');
+            $id('dataContent').classList.add('hidden');
+            $id('errorMessage').textContent = msg;
+        }
+
+        function showData() {
+            $id('loadingState').classList.add('hidden');
+            $id('errorState').classList.add('hidden');
+            $id('dataContent').classList.remove('hidden');
+        }
+
+        function renderAll(d) {
+            renderPrice(d);
+            renderPredictionDetail(d);
+            renderChart(d);
+            renderAnalysis(d);
+            renderFooter(d);
+            reportHeight();
+        }
+
+        // ===== RENDER FUNCTIONS =====
+        function renderPrice(d) {
+            var price = d.current_price || 0;
+            var marketBadge = '<span class="symbol-badge">' + (d.market || 'CRYPTO').toUpperCase() + '</span>';
+            $id('currentPrice').innerHTML = formatPrice(price, d.currency) + ' ' + marketBadge;
+
+            var pred = d.predictions && d.predictions[currentHorizon];
+            if (pred && pred.change_pct != null) {
+                var pct = pred.change_pct;
+                var sign = pct >= 0 ? '+' : '';
+                $id('priceChange').textContent = sign + pct.toFixed(2) + '%';
+                $id('priceChange').className = 'price-change ' + (pct >= 0 ? 'up' : 'down');
+            } else {
+                $id('priceChange').textContent = '--';
+                $id('priceChange').className = 'price-change';
+            }
+        }
+
+        function renderPredictionDetail(d) {
+            var labels = { '1d': '1 ngày', '7d': '7 ngày', '30d': '30 ngày' };
+            $id('predLabel').textContent = 'Dự đoán ' + (labels[currentHorizon] || '7 ngày');
+
+            var pred = d.predictions && d.predictions[currentHorizon];
+            
+            if (pred) {
+                $id('predPrice').textContent = formatPrice(pred.predicted_price || 0, d.currency);
+                var low = formatPrice(pred.predicted_low || 0, d.currency);
+                var high = formatPrice(pred.predicted_high || 0, d.currency);
+                $id('predRange').textContent = low + ' — ' + high;
+            } else {
+                $id('predPrice').textContent = 'N/A';
+                $id('predRange').textContent = 'N/A';
+            }
+        }
+
+        function renderChart(d) {
+            if (chart) { chart.destroy(); chart = null; }
+
+            var canvas = $id('predictionChart');
+            if (!canvas) return;
+            var ctx = canvas.getContext('2d');
+            if (!ctx) return;
+
+            var cd = d.chart_data;
+            if (!cd || !cd.points || cd.points.length === 0) return;
+
+            var labels = cd.labels || cd.points.map(function(p) { return p.date; });
+            var actuals = cd.points.map(function(p) { return p.actual; });
+
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Giá',
+                        data: actuals,
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59,130,246,0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointRadius: 0,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: {
+                            ticks: { maxTicksLimit: 5, color: '#64748b', font: { size: 10 } },
+                            grid: { display: false }
+                        },
+                        y: {
+                            ticks: { 
+                                color: '#64748b', 
+                                font: { size: 10 }, 
+                                callback: function(v) { return formatPriceShort(v, d.currency); }
+                            },
+                            grid: { color: 'rgba(255,255,255,0.05)' }
+                        }
+                    }
+                }
+            });
+        }
+
+        function renderAnalysis(d) {
+            var anal = d.analysis;
+            if (!anal) { $id('analysisBox').classList.add('hidden'); return; }
+            $id('analysisBox').classList.remove('hidden');
+
+            var sentiments = {
+                bullish: { emoji: '🟢', label: 'Tích cực', color: '#10b981' },
+                positive: { emoji: '🟢', label: 'Tích cực', color: '#10b981' },
+                neutral: { emoji: '🟡', label: 'Trung lập', color: '#f59e0b' },
+                bearish: { emoji: '🔴', label: 'Tiêu cực', color: '#ef4444' },
+                negative: { emoji: '🔴', label: 'Tiêu cực', color: '#ef4444' }
+            };
+            var s = sentiments[anal.sentiment] || sentiments.neutral;
+
+            $id('sentimentEmoji').textContent = s.emoji;
+            $id('sentimentLabel').textContent = 'Xu hướng: ' + s.label;
+            $id('sentimentLabel').style.color = s.color;
+            $id('analysisText').textContent = anal.analysis_vi || '--';
+        }
+
+        function renderFooter(d) {
+            var acc = d.accuracy;
+            if (acc && acc.total_predictions >= 7) {
+                $id('accuracyText').textContent = 'Độ chính xác: +/-' + (acc.avg_error_pct || 0).toFixed(1) + '%';
+            } else {
+                $id('accuracyText').textContent = '';
+            }
+
+            if (d.last_updated) {
+                var dt = new Date(d.last_updated);
+                $id('updatedText').textContent = 'Cập nhật: ' + dt.toLocaleString('vi-VN');
+            }
+        }
+
+        // ===== UTILITIES =====
+        function formatPrice(price, currency) {
+            if (price == null || isNaN(price)) return '--';
+            
+            if (currency === 'VND') {
+                if (price > 0 && price < 1000) {
+                    price = price * 1000;
+                }
+                return price.toLocaleString('vi-VN', { maximumFractionDigits: 0 }) + ' đ';
+            } else {
+                if (price >= 1000) {
+                    return '$' + price.toLocaleString('en-US', { maximumFractionDigits: 0 });
+                }
+                return '$' + price.toLocaleString('en-US', { maximumFractionDigits: 2 });
+            }
+        }
+
+        function formatPriceShort(price, currency) {
+            if (currency === 'VND') {
+                if (price > 0 && price < 1000) {
+                    price = price * 1000;
+                }
+                if (price >= 1000000) return (price / 1000000).toFixed(1) + 'M';
+                if (price >= 1000) return (price / 1000).toFixed(0) + 'K';
+                return price.toFixed(0) + 'đ';
+            } else {
+                if (price >= 1000) return '$' + (price / 1000).toFixed(0) + 'K';
+                return '$' + price.toFixed(0);
+            }
+        }
+
+        // ===== IFRAME HEIGHT REPORTING =====
+        function reportHeight() {
+            var h = document.body.scrollHeight;
+            h = Math.max(h, 300);
+            
+            if (window.parent && window.parent !== window) {
+                try {
+                    window.parent.postMessage({ 
+                        type: 'linews-widget-height', 
+                        height: h 
+                    }, '*');
+                } catch (e) {}
+            }
+        }
+
+        // Report height multiple times
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(reportHeight, 300);
+            setTimeout(reportHeight, 1000);
+            setTimeout(reportHeight, 2000);
+        });
+
+        // Re-report after data loads
+        var _originalShowData = showData;
+        showData = function() {
+            _originalShowData();
+            setTimeout(reportHeight, 100);
+            setTimeout(reportHeight, 500);
+        };
+
+        // Start
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
+    </script>
+</body>
+</html>
