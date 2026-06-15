@@ -1,0 +1,57 @@
+Linew
+Copyright 2026 Linew Contributors
+
+This product includes software developed at The Linew Project.
+
+This product includes software developed by third parties:
+
+Apache License 2.0
+------------------
+
+openai
+  Copyright (c) OpenAI
+  https://github.com/openai/openai-python
+
+anthropic
+  Copyright (c) Anthropic PBC
+  https://github.com/anthropics/anthropic-sdk-python
+
+requests
+  Copyright (c) Kenneth Reitz
+  https://requests.readthedocs.io
+
+yfinance
+  Copyright (c) Yahoo! Inc.
+  https://github.com/ranaroussi/yfinance
+
+torch
+  Copyright (c) Google LLC
+  https://pytorch.org
+
+websockets
+  Copyright (c) 2013-2024 Aymeric Augustin and contributors
+  https://github.com/python-websockets/websockets
+
+google-auth
+  Copyright (c) Google Cloud
+  https://github.com/googleapis/google-auth-library-python
+
+tweepy
+  Copyright (c) Tweepy Contributors
+  https://www.tweepy.org
+
+pytest-asyncio
+  Copyright (c) pytest-dev
+  https://github.com/pytest-dev/pytest-asyncio
+
+asyncpg
+  Copyright (c) magicstack
+  https://github.com/MagicStack/asyncpg
+
+readability-lxml
+  Copyright (c) 2017 Adam Green
+  https://github.com/buriy/python-readability
+
+typescript (dashboard)
+  Copyright (c) Microsoft Corporation
+  https://github.com/microsoft/TypeScript

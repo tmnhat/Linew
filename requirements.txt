@@ -18,7 +18,7 @@ gevent>=24.2  # For async I/O in Celery workers
 
 # RSS & Scraping
 feedparser>=6.0
-trafilatura>=1.8
+readability-lxml>=0.8.1
 httpx>=0.27
 beautifulsoup4>=4.12
 lxml>=5.2
@@ -29,7 +29,6 @@ anthropic>=0.25
 
 # WordPress
 requests>=2.32
-python-wordpress-xmlrpc>=2.3
 
 # Prediction System
 yfinance>=0.2

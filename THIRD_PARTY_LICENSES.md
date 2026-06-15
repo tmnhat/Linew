@@ -4,7 +4,7 @@ This document lists the open-source dependencies used in the Linew project and t
 
 ## Project License
 
-**Linew** is licensed under the **MIT License**.
+**Linew** is licensed under the **Apache License, Version 2.0**.
 
 Copyright (c) 2026 Linew Contributors
 
@@ -24,14 +24,13 @@ Copyright (c) 2026 Linew Contributors
 | celery | >=5.4 | BSD-3-Clause | Task queue |
 | redis | >=5.0 | MIT | Redis client |
 | feedparser | >=6.0 | BSD-2-Clause | RSS/Atom parsing |
-| trafilatura | >=1.8 | GPL-3.0 | Web scraping |
+| readability-lxml | >=0.8.1 | Apache-2.0 | Web scraping / article extraction |
 | httpx | >=0.27 | BSD-3-Clause | HTTP client |
 | beautifulsoup4 | >=4.12 | MIT | HTML parsing |
 | lxml | >=5.2 | BSD-3-Clause | XML/HTML processing |
 | openai | >=1.30 | Apache-2.0 | OpenAI API client |
 | anthropic | >=0.25 | Apache-2.0 | Anthropic API client |
 | requests | >=2.32 | Apache-2.0 | HTTP library |
-| python-wordpress-xmlrpc | >=2.3 | GPL-2.0+ | WordPress XML-RPC |
 | yfinance | >=0.2 | Apache-2.0 | Yahoo Finance |
 | numpy | >=1.26 | BSD-3-Clause | Numerical computing |
 | pandas | >=2.2 | BSD-3-Clause | Data analysis |
@@ -97,14 +96,20 @@ Copyright (c) 2026 Linew Contributors
 
 ## License Compatibility Notes
 
-### GPL Dependencies
+### License Status
 
-- **trafilatura** (GPL-3.0): Web scraping library. If Linew is used to scrape content, ensure compliance with GPL requirements.
-- **python-wordpress-xmlrpc** (GPL-2.0+): WordPress XML-RPC client. Only affects the WordPress integration module if distributed separately.
+As of the migration to Apache License 2.0, Linew contains **zero copyleft (GPL/AGPL) dependencies**. All previously identified GPL dependencies have been removed:
 
-### MIT License
+- **trafilatura** (GPL-3.0) — replaced with **readability-lxml** (Apache-2.0)
+- **python-wordpress-xmlrpc** (GPL-2.0+) — removed (was in requirements.txt but never imported)
 
-The MIT License is highly permissive and compatible with most open-source licenses. Linew's MIT license is compatible with all listed dependencies.
+### Permissive Dependencies
+
+All remaining dependencies use permissive or weak-copyleft licenses (MIT, BSD-3-Clause, Apache-2.0, ISC, etc.) that are fully compatible with Apache License 2.0.
+
+### LGPL Dependency
+
+- **psycopg2-binary** (LGPL) — PostgreSQL driver. psycopg2 is dynamically linked at runtime; the LGPL explicitly permits this usage pattern. Linew never statically links psycopg2 into distributed artifacts.
 
 ### Commercial APIs
 

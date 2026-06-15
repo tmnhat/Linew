@@ -8,7 +8,10 @@ import re
 from typing import Optional
 
 import httpx
-import trafilatura
+from bs4 import BeautifulSoup
+from readability import Document
+
+# Replaced trafilatura (GPL-3.0) with readability-lxml (Apache-2.0) for Apache 2.0 compatibility.
 
 from app.config import get_settings
 
@@ -170,7 +173,7 @@ async def fetch_via_flaresolverr(url: str, timeout: int = 60) -> Optional[str]:
 
 async def extract_main_content(html: str, url: str) -> tuple[Optional[str], list]:
     """
-    Extract main article content and images using trafilatura.
+    Extract main article content and images using readability-lxml.
 
     Returns:
         Tuple of (text_content, images_list)
@@ -183,34 +186,28 @@ async def extract_main_content(html: str, url: str) -> tuple[Optional[str], list
         logger.info(f"Extracted {len(images)} images from HTML")
 
     try:
-        # Try trafilatura with images enabled
-        text = trafilatura.extract(
-            html,
-            include_comments=False,
-            include_tables=True,
-            include_images=True,
-            url=url,
-            favor_precision=True,
-        )
-        if text and len(text) > 200:
-            return text, images or []
+        # Try readability-lxml first (Apache-2.0 licensed).
+        # Replaced trafilatura (GPL-3.0) with readability-lxml (Apache-2.0)
+        # for Apache 2.0 compatibility.
+        doc = Document(html)
+        article_html = doc.summary()
 
-        # Fallback with better settings - try without favor_precision
-        text = trafilatura.extract(
-            html,
-            include_comments=False,
-            include_tables=True,
-            include_images=True,
-            url=url,
-        )
-        if text and len(text) > 200:
-            return text, images or []
+        if article_html:
+            # readability returns HTML; convert to plain text via BeautifulSoup
+            soup = BeautifulSoup(article_html, "lxml")
+            text = soup.get_text(separator=" ", strip=True)
+            # Normalize whitespace
+            text = re.sub(r"[ \t]+", " ", text)
+            text = re.sub(r" *\n+ *", "\n", text).strip()
 
-        # If trafilatura returns nothing useful, try to extract content manually
+            if len(text) > 200:
+                return text, images or []
+
+        # If readability returns nothing useful, try to extract content manually
         # Look for article/main/content divs
         article_patterns = [
-            r'<article[^>]*>(.*?)</article>',
-            r'<main[^>]*>(.*?)</main>',
+            r"<article[^>]*>(.*?)</article>",
+            r"<main[^>]*>(.*?)</main>",
             r'<div[^>]*class=["\'][^"\']*article[^"\']*["\'][^>]*>(.*?)</div>',
             r'<div[^>]*class=["\'][^"\']*content[^"\']*["\'][^>]*>(.*?)</div>',
         ]
@@ -220,13 +217,13 @@ async def extract_main_content(html: str, url: str) -> tuple[Optional[str], list
             for match in matches:
                 if len(match) > 500:
                     # Clean the HTML but keep basic formatting
-                    clean_text = re.sub(r'<[^>]+>', ' ', match)
-                    clean_text = re.sub(r'\s+', ' ', clean_text).strip()
+                    clean_text = re.sub(r"<[^>]+>", " ", match)
+                    clean_text = re.sub(r"\s+", " ", clean_text).strip()
                     if len(clean_text) > 200:
                         return clean_text, images or []
 
     except Exception as e:
-        logger.warning(f"Trafilatura extraction failed: {e}")
+        logger.warning(f"Content extraction failed: {e}")
 
     return None, images or []
 

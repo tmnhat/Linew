@@ -2,7 +2,7 @@
 
 > AI-powered news automation platform — collect, enrich, write, govern, publish, and distribute.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](./LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![Node 18+](https://img.shields.io/badge/node-18+-green.svg)](https://nodejs.org/)
 
@@ -201,7 +201,11 @@ reproduction steps.
 
 ## License
 
-This project is released under the [MIT License](./LICENSE).
+This project is licensed under the Apache License, Version 2.0. See the [LICENSE](LICENSE) file for details and the [NOTICE](NOTICE) file for attributions to third-party software.
+
+You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
 
 ## Acknowledgements
 
